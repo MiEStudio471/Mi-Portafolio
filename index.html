@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carlos Abner | Desarrollador Front-End</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&display=swap" rel="stylesheet">
+    <style>
+        /* RESET Y CONFIGURACIONES GENERALES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            height: 100%;
+            width: 100%;
+            background-color: #000000;
+            color: #ffffff;
+            overflow-x: hidden;
+            font-family: 'Archivo Black', sans-serif;
+        }
+        
+        /* NAVBAR SIMPLIFICADO Y MEJOR UBICADO */
+        .simple-navbar {
+            width: 100%;
+            background-color: #000000;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 100;
+        }
+        
+        .nav-left {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .folio-text {
+            font-size: 18px;
+            letter-spacing: 3px;
+            color: #bbbbbb;
+            font-weight: 400;
+            margin-bottom: 5px;
+        }
+        
+        .year-text {
+            font-size: 14px;
+            color: #666666;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+        
+        .nav-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+        
+        .carlos-link {
+            color: #cccccc;
+            font-size: 24px;
+            text-decoration: none;
+            letter-spacing: 2px;
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+        
+        .carlos-link:hover {
+            color: #ffffff;
+        }
+        
+        .abner-text {
+            font-size: 12px;
+            color: #666666;
+            letter-spacing: 2px;
+            margin-top: 5px;
+        }
+        
+        /* BOTÓN CONTACTO FLOTANTE */
+        .floating-contact {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+        
+        .contact-btn {
+            background-color: #000000;
+            border: 1px solid #333333;
+            color: #999999;
+            padding: 12px 25px;
+            font-size: 14px;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Archivo Black', sans-serif;
+        }
+        
+        .contact-btn:hover {
+            border-color: #555555;
+            color: #ffffff;
+            transform: scale(1.05);
+        }
+        
+        /* SECCIÓN PRINCIPAL - TEXTO MÁS GRANDE */
+        .main-section {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        /* AQUÍ ESTÁ EL CAMBIO PRINCIPAL - TEXTO MÁS GRANDE */
+        .developer-title {
+            font-family: 'Archivo Black', sans-serif;
+            /* VALORES AUMENTADOS: MÍNIMO, RELATIVO, MÁXIMO */
+            font-size: clamp(10rem, 35vw, 30rem); /* ¡AUMENTADO! */
+            font-weight: 900;
+            line-height: 0.65; /* Ajustado para texto más grande */
+            letter-spacing: -12px; /* Aumentado negativo para juntar más */
+            color: #ffffff;
+            text-transform: uppercase;
+            text-align: center;
+            margin-top: -50px; /* Ajuste para centrar mejor */
+        }
+        
+        .title-line {
+            display: block;
+        }
+        
+        .title-line:nth-child(1) {
+            color: #ffffff;
+        }
+        
+        .title-line:nth-child(2) {
+            color: #f0f0f0;
+        }
+        
+        .title-line:nth-child(3) {
+            color: #e0e0e0;
+        }
+        
+        .title-line:nth-child(4) {
+            color: #d0d0d0;
+        }
+        
+        .hyphen {
+            display: inline-block;
+            margin-left: -40px; /* Ajustado para texto más grande */
+        }
+        
+        /* SECCIONES INFERIORES - IZQUIERDA Y DERECHA */
+        .bottom-sections {
+            width: 100%;
+            display: flex;
+            padding: 0 40px 80px 40px;
+            gap: 40px;
+        }
+        
+        .left-bottom-section {
+            flex: 1;
+            padding-right: 20px;
+        }
+        
+        .right-bottom-section {
+            flex: 1;
+            padding-left: 20px;
+            border-left: 1px solid #222222;
+        }
+        
+        .section-title {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 5rem); /* Aumentado proporcionalmente */
+            color: #ffffff;
+            margin-bottom: 40px;
+            letter-spacing: -3px;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+        
+        .projects-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .project-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(5rem, 15vw, 22rem); /* Aumentado proporcionalmente */
+            font-weight: 900;
+            letter-spacing: -8px; /* Aumentado negativo */
+            line-height: 0.65; /* Ajustado */
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+            text-transform: uppercase;
+        }
+        
+        .project-link:hover {
+            color: #cccccc;
+            transform: translateX(10px);
+        }
+        
+        .project-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #ffffff;
+            transition: width 0.3s ease;
+        }
+        
+        .project-link:hover::after {
+            width: 100%;
+        }
+        
+        .project-year {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(1.2rem, 2.5vw, 2.5rem); /* Aumentado proporcionalmente */
+            color: #666666;
+            margin-top: 5px;
+            letter-spacing: 1px;
+        }
+        
+        /* LISTA DE HABILIDADES */
+        .skills-list {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        .skill-item {
+            color: #ffffff;
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(4rem, 12vw, 18rem); /* Aumentado proporcionalmente */
+            font-weight: 900;
+            letter-spacing: -7px; /* Aumentado negativo */
+            line-height: 0.65; /* Ajustado */
+            text-transform: uppercase;
+        }
+        
+        .skill-desc {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: clamp(1.2rem, 2.5vw, 2.2rem); /* Aumentado proporcionalmente */
+            color: #666666;
+            margin-top: 5px;
+            letter-spacing: 1px;
+        }
+        
+        /* ANIMACIONES */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .developer-title {
+            animation: fadeIn 1.5s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .projects-list, .skills-list {
+            animation: fadeIn 1.5s ease-out 0.5s both;
+            opacity: 0;
+        }
+        
+        /* RESPONSIVE PERFECTO - AJUSTADO PARA TEXTO MÁS GRANDE */
+        @media (max-width: 1200px) {
+            .developer-title {
+                font-size: clamp(8rem, 30vw, 25rem);
+                letter-spacing: -10px;
+            }
+            
+            .project-link {
+                font-size: clamp(4rem, 12vw, 18rem);
+                letter-spacing: -7px;
+            }
+            
+            .skill-item {
+                font-size: clamp(3.5rem, 10vw, 15rem);
+                letter-spacing: -6px;
+            }
+        }
+        
+        @media (max-width: 1024px) {
+            .developer-title {
+                font-size: clamp(7rem, 25vw, 22rem);
+                line-height: 0.7;
+                letter-spacing: -8px;
+                margin-top: -30px;
+            }
+            
+            .bottom-sections {
+                flex-direction: column;
+                gap: 60px;
+            }
+            
+            .left-bottom-section, .right-bottom-section {
+                width: 100%;
+                padding: 0;
+            }
+            
+            .right-bottom-section {
+                border-left: none;
+                border-top: 1px solid #222222;
+                padding-top: 40px;
+            }
+            
+            .project-link {
+                font-size: clamp(3.5rem, 10vw, 16rem);
+                letter-spacing: -6px;
+            }
+            
+            .skill-item {
+                font-size: clamp(3rem, 8vw, 13rem);
+                letter-spacing: -5px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .simple-navbar {
+                padding: 15px 25px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .nav-left, .nav-right {
+                width: 100%;
+                margin-bottom: 15px;
+            }
+            
+            .nav-right {
+                align-items: flex-start;
+            }
+            
+            .main-section {
+                padding: 15px;
+                min-height: 80vh;
+            }
+            
+            .developer-title {
+                font-size: clamp(5rem, 20vw, 18rem);
+                line-height: 0.75;
+                letter-spacing: -6px;
+                margin-top: -20px;
+            }
+            
+            .bottom-sections {
+                padding: 0 25px 60px 25px;
+            }
+            
+            .project-link {
+                font-size: clamp(3rem, 9vw, 14rem);
+                letter-spacing: -5px;
+            }
+            
+            .skill-item {
+                font-size: clamp(2.5rem, 7vw, 11rem);
+                letter-spacing: -4px;
+            }
+            
+            .floating-contact {
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .contact-btn {
+                padding: 10px 20px;
+                font-size: 13px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .simple-navbar {
+                padding: 12px 20px;
+            }
+            
+            .main-section {
+                padding: 10px;
+                min-height: 70vh;
+            }
+            
+            .developer-title {
+                font-size: clamp(4rem, 15vw, 15rem);
+                line-height: 0.8;
+                letter-spacing: -4px;
+                margin-top: -15px;
+            }
+            
+            .bottom-sections {
+                padding: 0 20px 50px 20px;
+                gap: 50px;
+            }
+            
+            .project-link {
+                font-size: clamp(2.5rem, 8vw, 12rem);
+                letter-spacing: -3px;
+                line-height: 0.75;
+            }
+            
+            .skill-item {
+                font-size: clamp(2rem, 6vw, 9rem);
+                letter-spacing: -2.5px;
+                line-height: 0.75;
+            }
+            
+            .section-title {
+                font-size: clamp(1.8rem, 5vw, 4rem);
+                margin-bottom: 30px;
+            }
+            
+            .folio-text {
+                font-size: 16px;
+                letter-spacing: 2px;
+            }
+            
+            .carlos-link {
+                font-size: 22px;
+            }
+            
+            .abner-text {
+                font-size: 10px;
+            }
+        }
+        
+        @media (max-width: 400px) {
+            .simple-navbar {
+                padding: 10px 15px;
+            }
+            
+            .main-section {
+                padding: 5px;
+                min-height: 60vh;
+            }
+            
+            .developer-title {
+                font-size: clamp(3rem, 12vw, 12rem);
+                line-height: 0.85;
+                letter-spacing: -3px;
+                margin-top: -10px;
+            }
+            
+            .bottom-sections {
+                padding: 0 15px 40px 15px;
+            }
+            
+            .project-link {
+                font-size: clamp(2rem, 7vw, 10rem);
+                letter-spacing: -2px;
+                line-height: 0.8;
+            }
+            
+            .skill-item {
+                font-size: clamp(1.5rem, 5vw, 7rem);
+                letter-spacing: -1.5px;
+                line-height: 0.8;
+            }
+            
+            .section-title {
+                font-size: clamp(1.2rem, 4vw, 3rem);
+                margin-bottom: 25px;
+            }
+            
+            .folio-text {
+                font-size: 14px;
+                letter-spacing: 1.5px;
+            }
+            
+            .carlos-link {
+                font-size: 20px;
+            }
+            
+            .abner-text {
+                font-size: 9px;
+            }
+            
+            .floating-contact {
+                bottom: 15px;
+                right: 15px;
+            }
+            
+            .contact-btn {
+                padding: 8px 15px;
+                font-size: 11px;
+            }
+        }
+        
+        /* FOOTER */
+        .footer {
+            width: 100%;
+            padding: 30px 40px;
+            text-align: center;
+            color: #555555;
+            font-size: 14px;
+            letter-spacing: 2px;
+            border-top: 1px solid #222222;
+            margin-top: 20px;
+            font-family: 'Archivo Black', sans-serif;
+        }
+        
+        @media (max-width: 768px) {
+            .footer {
+                padding: 20px;
+                font-size: 12px;
+            }
+        }
+        
+        /* MODALES */
+        .modal-content {
+            background: #111111;
+            border: 1px solid #333333;
+            padding: 50px;
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+            font-family: 'Archivo Black', sans-serif;
+        }
+        
+        @media (max-width: 576px) {
+            .modal-content {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVBAR SIMPLIFICADO (NO FIJO) -->
+    <div class="simple-navbar">
+        <div class="nav-left">
+            <div class="folio-text">FOLIO DE DESARROLLADOR</div>
+            <div class="year-text">2025</div>
+        </div>
+        
+        <div class="nav-right">
+            <a href="#" class="carlos-link">CARLOS</a>
+            <div class="abner-text">ABNER</div>
+        </div>
+    </div>
+    
+    <!-- BOTÓN CONTACTO FLOTANTE -->
+    <div class="floating-contact">
+        <button class="contact-btn">CONTACTO</button>
+    </div>
+    
+    <!-- SECCIÓN PRINCIPAL CON TEXTO MÁS GRANDE -->
+    <section class="main-section">
+        <div class="developer-title">
+            <span class="title-line">DESARROLL</span>
+            <span class="title-line">ADOR</span>
+            <span class="title-line">FRONT</span>
+            <span class="title-line"><span class="hyphen">-</span>END</span>
+        </div>
+    </section>
+    
+    <!-- SECCIONES INFERIORES - IZQUIERDA Y DERECHA -->
+    <div class="bottom-sections">
+        <!-- SECCIÓN IZQUIERDA - PROYECTOS -->
+        <div class="left-bottom-section">
+            <h2 class="section-title">PROYECTOS</h2>
+            <div class="projects-list">
+                <a href="#" class="project-link">ECOMMERCE</a>
+                <div class="project-year">2024</div>
+                
+                <a href="#" class="project-link">DASHBOARD</a>
+                <div class="project-year">2024</div>
+                
+                <a href="#" class="project-link">MOBILE APP</a>
+                <div class="project-year">2023</div>
+                
+                <a href="#" class="project-link">BRAND ID</a>
+                <div class="project-year">2023</div>
+                
+                <a href="#" class="project-link">WEB3 UI</a>
+                <div class="project-year">2022</div>
+                
+                <a href="#" class="project-link">ENTERPRISE</a>
+                <div class="project-year">2022</div>
+            </div>
+        </div>
+        
+        <!-- SECCIÓN DERECHA - HABILIDADES -->
+        <div class="right-bottom-section">
+            <h2 class="section-title">HABILIDADES</h2>
+            <div class="skills-list">
+                <div class="skill-item">REACT</div>
+                <div class="skill-desc">LIBRERÍA DE JAVASCRIPT</div>
+                
+                <div class="skill-item">TYPESCRIPT</div>
+                <div class="skill-desc">JAVASCRIPT TIPADO</div>
+                
+                <div class="skill-item">UI/UX</div>
+                <div class="skill-desc">DISEÑO DE INTERFACES</div>
+                
+                <div class="skill-item">RESPONSIVE</div>
+                <div class="skill-desc">DISEÑO ADAPTATIVO</div>
+                
+                <div class="skill-item">PERFORMANCE</div>
+                <div class="skill-desc">OPTIMIZACIÓN WEB</div>
+                
+                <div class="skill-item">ANIMATIONS</div>
+                <div class="skill-desc">INTERACCIONES FLUIDAS</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p>© 2025 CARLOS ABNER — DESARROLLADOR FRONT-END</p>
+    </footer>
+    
+    <script>
+        // INTERACCIONES
+        
+        // Botón de contacto flotante
+        document.querySelector('.contact-btn').addEventListener('click', function() {
+            this.style.borderColor = '#777777';
+            this.style.color = '#ffffff';
+            
+            setTimeout(() => {
+                this.style.borderColor = '#333333';
+                this.style.color = '#999999';
+                showContactModal();
+            }, 300);
+        });
+        
+        // Enlace Carlos
+        document.querySelector('.carlos-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            this.style.color = '#ffffff';
+            
+            setTimeout(() => {
+                this.style.color = '#cccccc';
+                showInfoModal();
+            }, 200);
+        });
+        
+        // Enlaces de proyectos
+        document.querySelectorAll('.project-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                this.style.color = '#777777';
+                
+                setTimeout(() => {
+                    this.style.color = '#ffffff';
+                    const projectName = this.textContent;
+                    showProjectModal(projectName);
+                }, 200);
+            });
+        });
+        
+        // Modal de contacto
+        function showContactModal() {
+            const modal = document.createElement('div');
+            modal.style.position = 'fixed';
+            modal.style.top = '0';
+            modal.style.left = '0';
+            modal.style.width = '100%';
+            modal.style.height = '100%';
+            modal.style.backgroundColor = 'rgba(0, 0, 0, 0.95)';
+            modal.style.display = 'flex';
+            modal.style.justifyContent = 'center';
+            modal.style.alignItems = 'center';
+            modal.style.zIndex = '2000';
+            modal.style.opacity = '0';
+            modal.style.transition = 'opacity 0.5s ease';
+            
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <h2 style="color: #ffffff; font-size: 36px; margin-bottom: 30px; letter-spacing: -2px;">CONTACTO</h2>
+                    
+                    <p style="color: #cccccc; font-size: 18px; line-height: 1.5; margin-bottom: 30px;">
+                        Para propuestas de trabajo, colaboraciones o consultas:
+                    </p>
+                    
+                    <div style="margin-bottom: 25px;">
+                        <div style="color: #999999; font-size: 16px; margin-bottom: 5px;">EMAIL</div>
+                        <div style="color: #ffffff; font-size: 24px; letter-spacing: -1px;">contacto@carlosabner.dev</div>
+                    </div>
+                    
+                    <div style="margin-bottom: 25px;">
+                        <div style="color: #999999; font-size: 16px; margin-bottom: 5px;">TELÉFONO</div>
+                        <div style="color: #ffffff; font-size: 24px; letter-spacing: -1px;">+52 55 1234 5678</div>
+                    </div>
+                    
+                    <div style="margin-bottom: 40px;">
+                        <div style="color: #999999; font-size: 16px; margin-bottom: 5px;">DISPONIBILIDAD</div>
+                        <div style="color: #ffffff; font-size: 24px; letter-spacing: -1px;">ENERO 2025 EN ADELANTE</div>
+                    </div>
+                    
+                    <button id="closeContactModal" style="background: transparent; 
+                            border: 1px solid #333; color: #999; padding: 10px 30px; 
+                            cursor: pointer; font-family: 'Archivo Black', sans-serif;">CERRAR</button>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            setTimeout(() => {
+                modal.style.opacity = '1';
+            }, 10);
+            
+            document.getElementById('closeContactModal').addEventListener('click', function() {
+                modal.style.opacity = '0';
+                setTimeout(() => {
+                    document.body.removeChild(modal);
+                }, 500);
+            });
+            
+            modal.addEventListener('click', function(e) {
+                if(e.target === modal) {
+                    modal.style.opacity = '0';
+                    setTimeout(() => {
+                        document.body.removeChild(modal);
+                    }, 500);
+                }
+            });
+        }
+        
+        // Modal de información personal
+        function showInfoModal() {
+            const modal = document.createElement('div');
+            modal.style.position = 'fixed';
+            modal.style.top = '0';
+            modal.style.left = '0';
+            modal.style.width = '100%';
+            modal.style.height = '100%';
+            modal.style.backgroundColor = 'rgba(0, 0, 0, 0.95)';
+            modal.style.display = 'flex';
+            modal.style.justifyContent = 'center';
+            modal.style.alignItems = 'center';
+            modal.style.zIndex = '2000';
+            modal.style.opacity = '0';
+            modal.style.transition = 'opacity 0.5s ease';
+            
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <h2 style="color: #ffffff; font-size: 42px; margin-bottom: 20px; letter-spacing: -2px;">CARLOS ABNER</h2>
+                    
+                    <p style="color: #cccccc; font-size: 20px; line-height: 1.5; margin-bottom: 20px;">
+                        DESARROLLADOR FRONT-END ESPECIALIZADO EN EXPERIENCIAS DIGITALES ÚNICAS.
+                    </p>
+                    
+                    <p style="color: #999999; font-size: 18px; line-height: 1.5; margin-bottom: 30px;">
+                        CON MÁS DE 5 AÑOS TRANSFORMANDO IDEAS EN INTERFACES INTUITIVAS Y EFICIENTES.
+                    </p>
+                    
+                    <div style="margin-bottom: 25px;">
+                        <div style="color: #999999; font-size: 16px; margin-bottom: 10px;">ESPECIALIDADES</div>
+                        <div style="color: #ffffff; font-size: 22px; letter-spacing: -1px;">REACT · TYPESCRIPT · UI/UX · RESPONSIVE DESIGN</div>
+                    </div>
+                    
+                    <div style="margin-bottom: 40px;">
+                        <div style="color: #999999; font-size: 16px; margin-bottom: 10px;">UBICACIÓN</div>
+                        <div style="color: #ffffff; font-size: 22px; letter-spacing: -1px;">CIUDAD DE MÉXICO</div>
+                    </div>
+                    
+                    <button id="closeInfoModal" style="background: transparent; 
+                            border: 1px solid #333; color: #999; padding: 10px 30px; 
+                            cursor: pointer; font-family: 'Archivo Black', sans-serif;">CERRAR</button>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            setTimeout(() => {
+                modal.style.opacity = '1';
+            }, 10);
+            
+            document.getElementById('closeInfoModal').addEventListener('click', function() {
+                modal.style.opacity = '0';
+                setTimeout(() => {
+                    document.body.removeChild(modal);
+                }, 500);
+            });
+            
+            modal.addEventListener('click', function(e) {
+                if(e.target === modal) {
+                    modal.style.opacity = '0';
+                    setTimeout(() => {
+                        document.body.removeChild(modal);
+                    }, 500);
+                }
+            });
+        }
+        
+        // Modal de proyecto
+        function showProjectModal(projectName) {
+            const modal = document.createElement('div');
+            modal.style.position = 'fixed';
+            modal.style.top = '0';
+            modal.style.left = '0';
+            modal.style.width = '100%';
+            modal.style.height = '100%';
+            modal.style.backgroundColor = 'rgba(0, 0, 0, 0.95)';
+            modal.style.display = 'flex';
+            modal.style.justifyContent = 'center';
+            modal.style.alignItems = 'center';
+            modal.style.zIndex = '2000';
+            modal.style.opacity = '0';
+            modal.style.transition = 'opacity 0.5s ease';
+            
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <h2 style="color: #ffffff; font-size: 48px; margin-bottom: 20px; letter-spacing: -3px;">${projectName}</h2>
+                    
+                    <p style="color: #cccccc; font-size: 20px; line-height: 1.5; margin-bottom: 20px;">
+                        PROYECTO DESARROLLADO CON TECNOLOGÍAS MODERNAS Y DISEÑO RESPONSIVE.
+                    </p>
+                    
+                    <div style="margin-bottom: 25px;">
+                        <div style="color: #999999; font-size: 16px; margin-bottom: 10px;">TECNOLOGÍAS</div>
+                        <div style="color: #ffffff; font-size: 22px; letter-spacing: -1px;">REACT · TYPESCRIPT · SCSS · FIGMA · GIT</div>
+                    </div>
+                    
+                    <div style="margin-bottom: 40px;">
+                        <div style="color: #999999; font-size: 16px; margin-bottom: 10px;">CLIENTE</div>
+                        <div style="color: #ffffff; font-size: 22px; letter-spacing: -1px;">EMPRESA INTERNACIONAL TECNOLÓGICA</div>
+                    </div>
+                    
+                    <button id="closeProjectModal" style="background: transparent; 
+                            border: 1px solid #333; color: #999; padding: 10px 30px; 
+                            cursor: pointer; font-family: 'Archivo Black', sans-serif;">CERRAR</button>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            setTimeout(() => {
+                modal.style.opacity = '1';
+            }, 10);
+            
+            document.getElementById('closeProjectModal').addEventListener('click', function() {
+                modal.style.opacity = '0';
+                setTimeout(() => {
+                    document.body.removeChild(modal);
+                }, 500);
+            });
+            
+            modal.addEventListener('click', function(e) {
+                if(e.target === modal) {
+                    modal.style.opacity = '0';
+                    setTimeout(() => {
+                        document.body.removeChild(modal);
+                    }, 500);
+                }
+            });
+        }
+        
+        // Inicialización
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.8s ease';
+            
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+        
+        // Efecto parallax
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const title = document.querySelector('.developer-title');
+            title.style.transform = `translateY(${scrolled * 0.03}px) scale(${1 - scrolled * 0.0001})`;
+        });
+    </script>
+</body>
+</html>
